@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Prediction Result | LoanSense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🏦</span>
+                <span class="logo-text">LoanSense</span>
+            </div>
+            <nav>
+                <a href="/" class="nav-link">Predict</a>
+                <a href="/eda" class="nav-link">Analytics</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Result Section -->
+    <main class="main-container result-page">
+
+        <!-- Big result card -->
+        <div class="result-card {{ 'approved' if approved else 'rejected' }}">
+            <div class="result-icon">{{ '✅' if approved else '❌' }}</div>
+            <h1 class="result-title">Loan {{ 'Approved' if approved else 'Rejected' }}</h1>
+            <p class="result-subtitle">{{ result }}</p>
+
+            <div class="result-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Model Confidence</div>
+                    <div class="stat-value">{{ confidence }}%</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Risk Level</div>
+                    <div class="stat-value">{{ risk_level }}</div>
+                </div>
+            </div>
+
+            <!-- Confidence progress bar -->
+            <div class="confidence-bar-wrapper">
+                <div class="confidence-label">Confidence: {{ confidence }}%</div>
+                <div class="confidence-track">
+                    <div class="confidence-fill {{ 'fill-green' if approved else 'fill-red' }}"
+                         style="width: {{ confidence }}%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Summary -->
+        <div class="summary-card">
+            <h2>📋 Input Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span class="s-label">Gender</span>
+                    <span class="s-value">{{ 'Male' if input_data.gender == '1' else 'Female' }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Married</span>
+                    <span class="s-value">{{ 'Yes' if input_data.married == '1' else 'No' }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Dependents</span>
+                    <span class="s-value">{{ input_data.dependents }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Education</span>
+                    <span class="s-value">{{ 'Graduate' if input_data.education == '1' else 'Not Graduate' }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Self Employed</span>
+                    <span class="s-value">{{ 'Yes' if input_data.self_employed == '1' else 'No' }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Property Area</span>
+                    <span class="s-value">{{ input_data.property_area }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Applicant Income</span>
+                    <span class="s-value">₹{{ input_data.applicant_income }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Co-Applicant Income</span>
+                    <span class="s-value">₹{{ input_data.coapplicant_income }}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Loan Amount</span>
+                    <span class="s-value">₹{{ input_data.loan_amount }}K</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Loan Term</span>
+                    <span class="s-value">{{ input_data.loan_term }} months</span>
+                </div>
+                <div class="summary-item">
+                    <span class="s-label">Credit History</span>
+                    <span class="s-value">{{ 'Good ✔' if input_data.credit_history == '1' else 'Bad ✘' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-actions">
+            <a href="/" class="btn-predict">← Try Another Prediction</a>
+            <a href="/eda" class="btn-reset">📊 View Analytics</a>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>Smart Loan Risk Predictor &mdash; Built with Python, scikit-learn &amp; Flask</p>
+    </footer>
+
+</div>
+
+</body>
+</html>

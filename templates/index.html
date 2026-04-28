@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Smart Loan Risk Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🏦</span>
+                <span class="logo-text">LoanSense</span>
+            </div>
+            <nav>
+                <a href="/" class="nav-link active">Predict</a>
+                <a href="/eda" class="nav-link">Analytics</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Smart Loan Default &amp;<br>Credit Risk Predictor</h1>
+        <p class="hero-sub">Fill in the applicant's details below to get an instant loan approval prediction powered by machine learning.</p>
+    </section>
+
+    <!-- Form Card -->
+    <main class="main-container">
+        <form action="/predict" method="POST" class="loan-form">
+
+            <div class="form-section">
+                <h2 class="section-title">👤 Personal Information</h2>
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="married">Marital Status</label>
+                        <select name="married" id="married" required>
+                            <option value="">Select status</option>
+                            <option value="1">Married</option>
+                            <option value="0">Single</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dependents">Number of Dependents</label>
+                        <select name="dependents" id="dependents" required>
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3 or more</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="education">Education</label>
+                        <select name="education" id="education" required>
+                            <option value="">Select</option>
+                            <option value="1">Graduate</option>
+                            <option value="0">Not Graduate</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="self_employed">Self Employed?</label>
+                        <select name="self_employed" id="self_employed" required>
+                            <option value="">Select</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="property_area">Property Area</label>
+                        <select name="property_area" id="property_area" required>
+                            <option value="">Select area</option>
+                            <option value="Urban">Urban</option>
+                            <option value="Semiurban">Semiurban</option>
+                            <option value="Rural">Rural</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">💰 Financial Details</h2>
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="applicant_income">Applicant Income (₹/month)</label>
+                        <input type="number" name="applicant_income" id="applicant_income"
+                               placeholder="e.g. 5000" min="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coapplicant_income">Co-Applicant Income (₹/month)</label>
+                        <input type="number" name="coapplicant_income" id="coapplicant_income"
+                               placeholder="e.g. 2000" min="0" value="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan_amount">Loan Amount (₹ thousands)</label>
+                        <input type="number" name="loan_amount" id="loan_amount"
+                               placeholder="e.g. 150" min="1" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loan_term">Loan Term (months)</label>
+                        <select name="loan_term" id="loan_term" required>
+                            <option value="">Select term</option>
+                            <option value="360">360 (30 years)</option>
+                            <option value="180">180 (15 years)</option>
+                            <option value="120">120 (10 years)</option>
+                            <option value="84">84 (7 years)</option>
+                            <option value="60">60 (5 years)</option>
+                            <option value="36">36 (3 years)</option>
+                            <option value="12">12 (1 year)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="credit_history">Credit History</label>
+                        <select name="credit_history" id="credit_history" required>
+                            <option value="">Select</option>
+                            <option value="1">Good — All debts settled on time</option>
+                            <option value="0">Bad — Has outstanding debts</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn-predict">
+                    🔍 Predict Loan Risk
+                </button>
+                <button type="reset" class="btn-reset">Clear Form</button>
+            </div>
+
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p>Smart Loan Risk Predictor &mdash; Built with Python, scikit-learn &amp; Flask</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
